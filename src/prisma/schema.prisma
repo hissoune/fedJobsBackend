@@ -1,39 +1,94 @@
 generator client {
-  provider = "prisma-client-js"
+  provider = "prisma-client"
+  output = "../generated"
 }
 
 datasource db {
   provider = "postgresql"
 }
 
-
-model User {
-  id           String   @id @default(uuid())
-  name         String
-  email        String
-  password     String
-  refreshToken String?
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-
+ enum userRole {
+    TECH
+    CUSTOMER
+    ADMIN
   }
+model User {
+  id                String   @id @default(uuid())
+  name              String
+  email             String
+  password          String
+  refreshToken      String?
+  role              userRole @default(TECH)
+  customerJobs      Jobs[]   @relation("customerJobs")
+  technicianJobs    Jobs[]   @relation("technicianJobs")
+  applications      Applications[] @relation("technicianApplications")
+  reviews           Reviews[] @relation("technicianReviews")
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
 
-  enum JobStatus {
-  PENDING
-  PROCESING
-  COMPLEETED
-  FAILED
+  
+  customerReviews Reviews[] @relation("customerReviews")
 }
 
-  model Jobs {
-    id  String @id @default(uuid())
-
-    title String 
-
-    description String
-
-    status JobStatus  @default(PENDING)
-
-    
+  enum JobStatus {
+    PENDING
+    PROCESING
+    COMPLEETED
+    FAILED
   }
 
+enum JobPriority {
+    LOW 
+    MEDIUM 
+    HIGH 
+    URGENT 
+  }
+
+  model Jobs {
+    id               String @id @default(uuid())
+    title            String 
+    description      String
+    status           JobStatus  @default(PENDING)
+    priority         JobPriority @default(LOW)
+    notes            String[]
+    photos           String[]
+    customerId       String
+    technicianId     String?
+    customer         User? @relation("customerJobs",fields: [customerId], references: [id])
+    technician       User? @relation("technicianJobs",fields: [technicianId], references: [id])
+    applications     Applications[] @relation("jobApplications")
+    review Reviews?  @relation("jobReview")
+    
+  }
+enum ApplicationStatus {
+      PENDING
+      APROOVED
+      DECLINED
+     }
+model Applications {
+
+      id                             String @id @default(uuid())
+      message                        String 
+      jobId                          String 
+      techId                         String
+      status                         ApplicationStatus @default(PENDING)
+      technician                     User @relation("technicianApplications",fields: [techId], references: [id])
+      job                            Jobs @relation("jobApplications",fields: [jobId], references: [id])
+
+
+}
+
+model Reviews {
+  id         String @id @default(uuid())
+
+  rating     Int
+  comment    String
+
+  jobId      String @unique
+  customerId String
+  techId     String
+
+  job         Jobs @relation("jobReview", fields: [jobId], references: [id])
+  customer    User @relation("customerReviews", fields: [customerId], references: [id])
+  technician  User @relation("technicianReviews", fields: [techId], references: [id])
+}

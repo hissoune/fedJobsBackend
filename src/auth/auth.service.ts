@@ -66,20 +66,30 @@ export class AuthService {
     return { ...userWithoutPassword, token: accessToken, refreshToken };
 
   }
+ 
+ async profile(userId:string){
+
+   const user =await  this.prismaService.user.findUnique({
+      where:{id:userId}
+     })
+
+   if (!user) {
+     throw new NotFoundException('user not found');
+   }
+
+ const { refreshToken: _refreshToken, password: _password, ...userWithoutRefreshToken } = user;
+ return userWithoutRefreshToken
+
+ }
 
  async logout(userId: string) {
      const user =await  this.prismaService.user.findUnique({
       where:{id:userId}
-     })
-
-     console.log("useeeeeeeeee",user);
-     
+     })     
 
      if (!user) {
       throw new  NotFoundException("theere is no user ")
-     }
-    console.log('ffgfjgndfjkngfdgnfjkbgfjbjfbg');
-    
+     }    
    return   await  this.prismaService.user.update({
        where: { id: user.id },
       data: { refreshToken: null }
@@ -106,9 +116,6 @@ export class AuthService {
       if (!match) {
         throw new NotFoundException('user not found');
       }
-
-      console.log("u r heeeer  ");
-      
 
       const accessToken = this.jwtService.sign({ id: user.id });
       const refreshToken = this.jwtService.sign({ id: user.id }, { expiresIn: '7d' });

@@ -18,6 +18,15 @@ export class AuthController {
   }
 
   @UseGuards(AuthGuard)
+  @Get('profile')
+  profile( @Req() request: any) {
+
+
+  const userId = request.user?.id;
+  
+    return this.authService.profile(userId);
+  }
+  @UseGuards(AuthGuard)
   @Post('logout')
   logout( @Req() request: any) {
 
@@ -29,9 +38,9 @@ export class AuthController {
   }
 
     @Post('refresh')
-  async refresh(@Body() refreshDto: any) {
-    return this.authService.refresh(refreshDto);
-  }
+    async refresh(@Body() refreshDto: any) {
+      return this.authService.refresh(refreshDto);
+    }
 
 
   

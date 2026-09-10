@@ -5,6 +5,7 @@ import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { JobsModule } from './jobs/jobs.module';
+import { ApplicationsModule } from './applications/applications.module';
 
 @Module({
   imports: [
@@ -22,7 +23,10 @@ import { JobsModule } from './jobs/jobs.module';
     AuthModule,
     
     
-    JobsModule],
+    JobsModule,
+    
+    
+    ApplicationsModule],
   controllers: [AppController],
   providers: [AppService],
 })

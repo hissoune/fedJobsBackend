@@ -1,26 +1,73 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateJobDto } from './dto/create-job.dto';
 import { UpdateJobDto } from './dto/update-job.dto';
+import { PrismaService } from 'src/prisma/prisma.service';
+import { JobStatus } from 'src/generated/enums';
 
 @Injectable()
 export class JobsService {
-  create(createJobDto: CreateJobDto) {
-    return 'This action adds a new job';
+
+  constructor(
+    private readonly prismaService:PrismaService
+  ){}
+  async create(userId:string,createJobDto: CreateJobDto) {
+    try {
+       const newJob = await this.prismaService.jobs.create({
+        data: {...createJobDto,customerId:userId} ,
+      });
+       return newJob;
+    } catch (error) {
+      throw new BadRequestException('job craetion failed')
+    }
   }
 
-  findAll() {
-    return `This action returns all jobs`;
+  async findAll() {
+   return await this.prismaService.jobs.findMany();
+
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} job`;
+  async findOne(id: string) {
+   const job =await  this.prismaService.jobs.findUnique({
+    where:{id}
+   })
+
+   if (!job) throw new NotFoundException('job not found')
+
+    return job
   }
 
-  update(id: number, updateJobDto: UpdateJobDto) {
-    return `This action updates a #${id} job`;
+  async update(id: string,customerId, updateJobDto: UpdateJobDto) {
+   try {
+     const job = await this.findOne(id)
+
+    if (job.customerId != customerId) throw new ForbiddenException('this job is not yours to delete');
+
+    return await this.prismaService.jobs.update({where:{id:id},
+      data:updateJobDto
+    })
+        
+   } catch (error) {
+    throw new BadRequestException('job update failed ')
+   }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} job`;
+  async remove(id: string,customerId:string) {
+   try {
+    const job = await this.findOne(id)
+
+    if (job.customerId != customerId) throw new ForbiddenException('this job is not yours to delete');
+
+    await  this.prismaService.jobs.delete({where:{id}})
+   return id
+   } catch (error) {
+    
+   }
+  }
+
+
+  async changeStatus(id: string , status:JobStatus){
+   const job = await this.findOne(id)
+   
+
   }
 }
