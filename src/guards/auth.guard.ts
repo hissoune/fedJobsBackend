@@ -21,12 +21,10 @@ export class AuthGuard {
 
   try{
         const decodedToken = await this.jwtService.verifyAsync(token);
-        console.log('ddddddddd',decodedToken);
         
         request.user = decodedToken.user || decodedToken; 
         return true;
     } catch (error) {
-        console.log("ghghghghghghghg");
         
         throw new UnauthorizedException('invalid token')
     }

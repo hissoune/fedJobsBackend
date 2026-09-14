@@ -23,11 +23,9 @@ model User {
   technicianJobs    Jobs[]   @relation("technicianJobs")
   applications      Applications[] @relation("technicianApplications")
   reviews           Reviews[] @relation("technicianReviews")
-  createdAt         DateTime @default(now())
-  updatedAt         DateTime @updatedAt
-
-  
   customerReviews Reviews[] @relation("customerReviews")
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @default(now()) @updatedAt
 }
 
   enum JobStatus {
@@ -58,6 +56,8 @@ enum JobPriority {
     technician       User? @relation("technicianJobs",fields: [technicianId], references: [id])
     applications     Applications[] @relation("jobApplications")
     review Reviews?  @relation("jobReview")
+    createdAt        DateTime @default(now())
+      updatedAt      DateTime @default(now()) @updatedAt
     
   }
 enum ApplicationStatus {
@@ -74,7 +74,8 @@ model Applications {
       status                         ApplicationStatus @default(PENDING)
       technician                     User @relation("technicianApplications",fields: [techId], references: [id])
       job                            Jobs @relation("jobApplications",fields: [jobId], references: [id])
-
+      createdAt                      DateTime @default(now())
+      updatedAt                      DateTime @default(now()) @updatedAt
 
 }
 
@@ -91,4 +92,6 @@ model Reviews {
   job         Jobs @relation("jobReview", fields: [jobId], references: [id])
   customer    User @relation("customerReviews", fields: [customerId], references: [id])
   technician  User @relation("technicianReviews", fields: [techId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now()) @updatedAt
 }

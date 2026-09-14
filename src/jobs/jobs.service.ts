@@ -2,7 +2,7 @@ import { BadRequestException, ForbiddenException, Injectable, NotFoundException 
 import { CreateJobDto } from './dto/create-job.dto';
 import { UpdateJobDto } from './dto/update-job.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { JobStatus } from 'src/generated/enums';
+import { JobPriority, JobStatus } from 'src/generated/enums';
 
 @Injectable()
 export class JobsService {
@@ -21,10 +21,41 @@ export class JobsService {
     }
   }
 
-  async findAll() {
-   return await this.prismaService.jobs.findMany();
+async findAll(page: number,priority?:string) {
+  const limit = 6;
+    let where: { status: JobStatus;technicianId:string | null; priority?: JobPriority } = {
+      status: JobStatus.PENDING,
+      technicianId:null 
+    };
 
-  }
+    if (priority) {
+      where = { ...where, priority: priority as JobPriority };
+    }
+  const [jobs, total] = await Promise.all([
+    this.prismaService.jobs.findMany({
+      where
+      ,
+      skip: (page - 1) * limit,
+      take: limit,
+    }),
+
+    this.prismaService.jobs.count({
+      where: {
+        status: JobStatus.PENDING,
+      },
+    }),
+  ]);
+
+  const totalPages = Math.ceil(total / limit);
+
+  return {
+    jobs,
+    currentPage: page,
+    totalPages,
+    hasMore: page < totalPages,
+    total
+  };
+}
 
   async findOne(id: string) {
    const job =await  this.prismaService.jobs.findUnique({
@@ -65,9 +96,4 @@ export class JobsService {
   }
 
 
-  async changeStatus(id: string , status:JobStatus){
-   const job = await this.findOne(id)
-   
-
-  }
 }

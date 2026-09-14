@@ -53,7 +53,9 @@ export class AuthService {
       throw new BadRequestException('Invalid credentials');
     }
 
-    const accessToken = this.jwtService.sign({ id: user.id });
+    const accessToken = this.jwtService.sign({ id: user.id,role:user.role });
+    console.log("acs",accessToken);
+    
     const refreshToken = this.jwtService.sign({ id: user.id }, { expiresIn: '7d' });
     const hashedToken = await this.authHelper.hashPassword(refreshToken);
 
