@@ -40,7 +40,7 @@ export type JobPriority = (typeof JobPriority)[keyof typeof JobPriority]
 
 export const ApplicationStatus = {
   PENDING: 'PENDING',
-  APROOVED: 'APROOVED',
+  APPROVED: 'APPROVED',
   DECLINED: 'DECLINED'
 } as const
 
