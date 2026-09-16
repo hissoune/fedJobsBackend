@@ -17,6 +17,8 @@ model User {
   name              String
   email             String
   password          String
+  imageUrl          String?
+  age               String?
   refreshToken      String?
   role              userRole @default(TECH)
   customerJobs      Jobs[]   @relation("customerJobs")

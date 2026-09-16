@@ -4,15 +4,23 @@ import { RegisterDto } from './dto/create-auth.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { AuthHelper } from './helper';
 import { JwtService } from '@nestjs/jwt';
+import { Client } from 'minio';
+import { InjectMinio } from 'nestjs-minio';
 
 @Injectable()
 export class AuthService {
   constructor(
     private readonly authHelper: AuthHelper,
     private readonly prismaService: PrismaService,
-    private readonly jwtService: JwtService
+    private readonly jwtService: JwtService,
+    @InjectMinio() private readonly minio: Client
   ) {}
-  async register(registerDto: RegisterDto) {
+
+  async register(registerDto: RegisterDto,file) {
+
+    
+   
+    
       try {
         const hashedPassword = await this.authHelper.hashPassword(registerDto.password || '');
         const savedUser = await this.prismaService.user.create({
@@ -21,6 +29,17 @@ export class AuthService {
             password: hashedPassword
           } as any
         });
+         let  imageKey:string = '' 
+        if (file) {
+           imageKey = `avatars/${savedUser.id}-${file.originalname}`
+          await this.minio.putObject(
+            process.env.MINIO_BUCKET || 'uploads',
+            imageKey,
+            file.buffer,
+            file.size,
+            { 'Content-Type': file.mimetype }
+          );
+        }
 
         const accessToken = this.jwtService.sign({ id: savedUser.id });
         const refreshToken = this.jwtService.sign({ id: savedUser.id }, { expiresIn: '7d' });
@@ -28,11 +47,12 @@ export class AuthService {
 
         await this.prismaService.user.update({
           where: { id: savedUser.id },
-          data: { refreshToken: hashedToken }
+          data: { refreshToken: hashedToken,imageUrl:imageKey }
         });
-
+         
         const { password, ...userWithoutPassword } = savedUser;
-        return { ...userWithoutPassword, token: accessToken, refreshToken };
+       const  userWithUrl = {...userWithoutPassword,imageUrl:await this.authHelper.presineduRL(userWithoutPassword.imageUrl|| '')}
+        return { userWithUrl, token: accessToken, refreshToken };
       } catch (error) {
         throw new BadRequestException('Registration failed');
       }
@@ -64,8 +84,12 @@ export class AuthService {
       data: { refreshToken: hashedToken }
     });
 
+
+
     const { password, ...userWithoutPassword } = user;
-    return { ...userWithoutPassword, token: accessToken, refreshToken };
+
+   const  userWithUrl = {...userWithoutPassword,imageUrl:await this.authHelper.presineduRL(userWithoutPassword.imageUrl || '')}
+    return { userWithUrl, token: accessToken, refreshToken };
 
   }
  
@@ -80,7 +104,7 @@ export class AuthService {
    }
 
  const { refreshToken: _refreshToken, password: _password, ...userWithoutRefreshToken } = user;
- return userWithoutRefreshToken
+ return {...userWithoutRefreshToken,imageUrl:await this.authHelper.presineduRL(userWithoutRefreshToken.imageUrl||'')}
 
  }
 

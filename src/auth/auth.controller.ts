@@ -1,17 +1,41 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Req } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Req, UseInterceptors } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import {  RegisterDto } from './dto/create-auth.dto';
 import { loginAuthDto } from './dto/login-auth.dto';
 import { AuthGuard } from 'src/guards/auth.guard';
+import { FileInterceptor } from '@nestjs/platform-express';
+import {Express}from 'express'
+  import { UploadedFile } from '@nestjs/common';
 
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  @Post('register')
-  register(@Body() registerDto: RegisterDto) {
-    return this.authService.register(registerDto);
-  }
+
+@Post('register')
+@UseInterceptors(
+  FileInterceptor('file', {
+    limits: {
+      fileSize: 5 * 1024 * 1024,
+    },
+  }),
+)
+register(
+  @Req() req,
+  @Body() registerDto: RegisterDto,
+  @UploadedFile() file: Express.Multer.File,
+) {
+  console.log(registerDto);
+  console.log('fgf', req.headers);
+  console.log('dfdf', file);
+
+  return this.authService.register(registerDto, file);
+}
+
+
+
+
+
   @Post('login')
   login(@Body() loginAuthDto: loginAuthDto) {
     return this.authService.login(loginAuthDto);

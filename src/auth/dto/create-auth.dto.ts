@@ -1,4 +1,5 @@
-import { IsEmail, IsNotEmpty, IsString } from "@nestjs/class-validator";
+import { IsEmail, IsNotEmpty, IsOptional, IsString } from "@nestjs/class-validator";
+import { Express } from "express";
 
 export class RegisterDto {
     @IsNotEmpty()
@@ -12,5 +13,12 @@ export class RegisterDto {
 
     @IsNotEmpty()
     @IsString()
+    age!: string;
+
+    @IsNotEmpty()
+    @IsString()
     password!: string;
+
+
+
 }

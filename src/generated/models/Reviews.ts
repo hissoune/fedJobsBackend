@@ -41,6 +41,8 @@ export type ReviewsMinAggregateOutputType = {
   jobId: string | null
   customerId: string | null
   techId: string | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type ReviewsMaxAggregateOutputType = {
@@ -50,6 +52,8 @@ export type ReviewsMaxAggregateOutputType = {
   jobId: string | null
   customerId: string | null
   techId: string | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type ReviewsCountAggregateOutputType = {
@@ -59,6 +63,8 @@ export type ReviewsCountAggregateOutputType = {
   jobId: number
   customerId: number
   techId: number
+  createdAt: number
+  updatedAt: number
   _all: number
 }
 
@@ -78,6 +84,8 @@ export type ReviewsMinAggregateInputType = {
   jobId?: true
   customerId?: true
   techId?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type ReviewsMaxAggregateInputType = {
@@ -87,6 +95,8 @@ export type ReviewsMaxAggregateInputType = {
   jobId?: true
   customerId?: true
   techId?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type ReviewsCountAggregateInputType = {
@@ -96,6 +106,8 @@ export type ReviewsCountAggregateInputType = {
   jobId?: true
   customerId?: true
   techId?: true
+  createdAt?: true
+  updatedAt?: true
   _all?: true
 }
 
@@ -192,6 +204,8 @@ export type ReviewsGroupByOutputType = {
   jobId: string
   customerId: string
   techId: string
+  createdAt: Date
+  updatedAt: Date
   _count: ReviewsCountAggregateOutputType | null
   _avg: ReviewsAvgAggregateOutputType | null
   _sum: ReviewsSumAggregateOutputType | null
@@ -224,6 +238,8 @@ export type ReviewsWhereInput = {
   jobId?: Prisma.StringFilter<"Reviews"> | string
   customerId?: Prisma.StringFilter<"Reviews"> | string
   techId?: Prisma.StringFilter<"Reviews"> | string
+  createdAt?: Prisma.DateTimeFilter<"Reviews"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Reviews"> | Date | string
   job?: Prisma.XOR<Prisma.JobsScalarRelationFilter, Prisma.JobsWhereInput>
   customer?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   technician?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -236,6 +252,8 @@ export type ReviewsOrderByWithRelationInput = {
   jobId?: Prisma.SortOrder
   customerId?: Prisma.SortOrder
   techId?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   job?: Prisma.JobsOrderByWithRelationInput
   customer?: Prisma.UserOrderByWithRelationInput
   technician?: Prisma.UserOrderByWithRelationInput
@@ -251,6 +269,8 @@ export type ReviewsWhereUniqueInput = Prisma.AtLeast<{
   comment?: Prisma.StringFilter<"Reviews"> | string
   customerId?: Prisma.StringFilter<"Reviews"> | string
   techId?: Prisma.StringFilter<"Reviews"> | string
+  createdAt?: Prisma.DateTimeFilter<"Reviews"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Reviews"> | Date | string
   job?: Prisma.XOR<Prisma.JobsScalarRelationFilter, Prisma.JobsWhereInput>
   customer?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   technician?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -263,6 +283,8 @@ export type ReviewsOrderByWithAggregationInput = {
   jobId?: Prisma.SortOrder
   customerId?: Prisma.SortOrder
   techId?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   _count?: Prisma.ReviewsCountOrderByAggregateInput
   _avg?: Prisma.ReviewsAvgOrderByAggregateInput
   _max?: Prisma.ReviewsMaxOrderByAggregateInput
@@ -280,12 +302,16 @@ export type ReviewsScalarWhereWithAggregatesInput = {
   jobId?: Prisma.StringWithAggregatesFilter<"Reviews"> | string
   customerId?: Prisma.StringWithAggregatesFilter<"Reviews"> | string
   techId?: Prisma.StringWithAggregatesFilter<"Reviews"> | string
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"Reviews"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Reviews"> | Date | string
 }
 
 export type ReviewsCreateInput = {
   id?: string
   rating: number
   comment: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
   job: Prisma.JobsCreateNestedOneWithoutReviewInput
   customer: Prisma.UserCreateNestedOneWithoutCustomerReviewsInput
   technician: Prisma.UserCreateNestedOneWithoutReviewsInput
@@ -298,12 +324,16 @@ export type ReviewsUncheckedCreateInput = {
   jobId: string
   customerId: string
   techId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type ReviewsUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   rating?: Prisma.IntFieldUpdateOperationsInput | number
   comment?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   job?: Prisma.JobsUpdateOneRequiredWithoutReviewNestedInput
   customer?: Prisma.UserUpdateOneRequiredWithoutCustomerReviewsNestedInput
   technician?: Prisma.UserUpdateOneRequiredWithoutReviewsNestedInput
@@ -316,6 +346,8 @@ export type ReviewsUncheckedUpdateInput = {
   jobId?: Prisma.StringFieldUpdateOperationsInput | string
   customerId?: Prisma.StringFieldUpdateOperationsInput | string
   techId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ReviewsCreateManyInput = {
@@ -325,12 +357,16 @@ export type ReviewsCreateManyInput = {
   jobId: string
   customerId: string
   techId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type ReviewsUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   rating?: Prisma.IntFieldUpdateOperationsInput | number
   comment?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ReviewsUncheckedUpdateManyInput = {
@@ -340,6 +376,8 @@ export type ReviewsUncheckedUpdateManyInput = {
   jobId?: Prisma.StringFieldUpdateOperationsInput | string
   customerId?: Prisma.StringFieldUpdateOperationsInput | string
   techId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ReviewsListRelationFilter = {
@@ -364,6 +402,8 @@ export type ReviewsCountOrderByAggregateInput = {
   jobId?: Prisma.SortOrder
   customerId?: Prisma.SortOrder
   techId?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type ReviewsAvgOrderByAggregateInput = {
@@ -377,6 +417,8 @@ export type ReviewsMaxOrderByAggregateInput = {
   jobId?: Prisma.SortOrder
   customerId?: Prisma.SortOrder
   techId?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type ReviewsMinOrderByAggregateInput = {
@@ -386,6 +428,8 @@ export type ReviewsMinOrderByAggregateInput = {
   jobId?: Prisma.SortOrder
   customerId?: Prisma.SortOrder
   techId?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type ReviewsSumOrderByAggregateInput = {
@@ -520,6 +564,8 @@ export type ReviewsCreateWithoutTechnicianInput = {
   id?: string
   rating: number
   comment: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
   job: Prisma.JobsCreateNestedOneWithoutReviewInput
   customer: Prisma.UserCreateNestedOneWithoutCustomerReviewsInput
 }
@@ -530,6 +576,8 @@ export type ReviewsUncheckedCreateWithoutTechnicianInput = {
   comment: string
   jobId: string
   customerId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type ReviewsCreateOrConnectWithoutTechnicianInput = {
@@ -546,6 +594,8 @@ export type ReviewsCreateWithoutCustomerInput = {
   id?: string
   rating: number
   comment: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
   job: Prisma.JobsCreateNestedOneWithoutReviewInput
   technician: Prisma.UserCreateNestedOneWithoutReviewsInput
 }
@@ -556,6 +606,8 @@ export type ReviewsUncheckedCreateWithoutCustomerInput = {
   comment: string
   jobId: string
   techId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type ReviewsCreateOrConnectWithoutCustomerInput = {
@@ -594,6 +646,8 @@ export type ReviewsScalarWhereInput = {
   jobId?: Prisma.StringFilter<"Reviews"> | string
   customerId?: Prisma.StringFilter<"Reviews"> | string
   techId?: Prisma.StringFilter<"Reviews"> | string
+  createdAt?: Prisma.DateTimeFilter<"Reviews"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Reviews"> | Date | string
 }
 
 export type ReviewsUpsertWithWhereUniqueWithoutCustomerInput = {
@@ -616,6 +670,8 @@ export type ReviewsCreateWithoutJobInput = {
   id?: string
   rating: number
   comment: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
   customer: Prisma.UserCreateNestedOneWithoutCustomerReviewsInput
   technician: Prisma.UserCreateNestedOneWithoutReviewsInput
 }
@@ -626,6 +682,8 @@ export type ReviewsUncheckedCreateWithoutJobInput = {
   comment: string
   customerId: string
   techId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type ReviewsCreateOrConnectWithoutJobInput = {
@@ -648,6 +706,8 @@ export type ReviewsUpdateWithoutJobInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   rating?: Prisma.IntFieldUpdateOperationsInput | number
   comment?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   customer?: Prisma.UserUpdateOneRequiredWithoutCustomerReviewsNestedInput
   technician?: Prisma.UserUpdateOneRequiredWithoutReviewsNestedInput
 }
@@ -658,6 +718,8 @@ export type ReviewsUncheckedUpdateWithoutJobInput = {
   comment?: Prisma.StringFieldUpdateOperationsInput | string
   customerId?: Prisma.StringFieldUpdateOperationsInput | string
   techId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ReviewsCreateManyTechnicianInput = {
@@ -666,6 +728,8 @@ export type ReviewsCreateManyTechnicianInput = {
   comment: string
   jobId: string
   customerId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type ReviewsCreateManyCustomerInput = {
@@ -674,12 +738,16 @@ export type ReviewsCreateManyCustomerInput = {
   comment: string
   jobId: string
   techId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type ReviewsUpdateWithoutTechnicianInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   rating?: Prisma.IntFieldUpdateOperationsInput | number
   comment?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   job?: Prisma.JobsUpdateOneRequiredWithoutReviewNestedInput
   customer?: Prisma.UserUpdateOneRequiredWithoutCustomerReviewsNestedInput
 }
@@ -690,6 +758,8 @@ export type ReviewsUncheckedUpdateWithoutTechnicianInput = {
   comment?: Prisma.StringFieldUpdateOperationsInput | string
   jobId?: Prisma.StringFieldUpdateOperationsInput | string
   customerId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ReviewsUncheckedUpdateManyWithoutTechnicianInput = {
@@ -698,12 +768,16 @@ export type ReviewsUncheckedUpdateManyWithoutTechnicianInput = {
   comment?: Prisma.StringFieldUpdateOperationsInput | string
   jobId?: Prisma.StringFieldUpdateOperationsInput | string
   customerId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ReviewsUpdateWithoutCustomerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   rating?: Prisma.IntFieldUpdateOperationsInput | number
   comment?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   job?: Prisma.JobsUpdateOneRequiredWithoutReviewNestedInput
   technician?: Prisma.UserUpdateOneRequiredWithoutReviewsNestedInput
 }
@@ -714,6 +788,8 @@ export type ReviewsUncheckedUpdateWithoutCustomerInput = {
   comment?: Prisma.StringFieldUpdateOperationsInput | string
   jobId?: Prisma.StringFieldUpdateOperationsInput | string
   techId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ReviewsUncheckedUpdateManyWithoutCustomerInput = {
@@ -722,6 +798,8 @@ export type ReviewsUncheckedUpdateManyWithoutCustomerInput = {
   comment?: Prisma.StringFieldUpdateOperationsInput | string
   jobId?: Prisma.StringFieldUpdateOperationsInput | string
   techId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -733,6 +811,8 @@ export type ReviewsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   jobId?: boolean
   customerId?: boolean
   techId?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   job?: boolean | Prisma.JobsDefaultArgs<ExtArgs>
   customer?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   technician?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -745,6 +825,8 @@ export type ReviewsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   jobId?: boolean
   customerId?: boolean
   techId?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   job?: boolean | Prisma.JobsDefaultArgs<ExtArgs>
   customer?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   technician?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -757,6 +839,8 @@ export type ReviewsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   jobId?: boolean
   customerId?: boolean
   techId?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   job?: boolean | Prisma.JobsDefaultArgs<ExtArgs>
   customer?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   technician?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -769,9 +853,11 @@ export type ReviewsSelectScalar = {
   jobId?: boolean
   customerId?: boolean
   techId?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
 }
 
-export type ReviewsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "rating" | "comment" | "jobId" | "customerId" | "techId", ExtArgs["result"]["reviews"]>
+export type ReviewsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "rating" | "comment" | "jobId" | "customerId" | "techId" | "createdAt" | "updatedAt", ExtArgs["result"]["reviews"]>
 export type ReviewsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   job?: boolean | Prisma.JobsDefaultArgs<ExtArgs>
   customer?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -802,6 +888,8 @@ export type $ReviewsPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     jobId: string
     customerId: string
     techId: string
+    createdAt: Date
+    updatedAt: Date
   }, ExtArgs["result"]["reviews"]>
   composites: {}
 }
@@ -1234,6 +1322,8 @@ export interface ReviewsFieldRefs {
   readonly jobId: Prisma.FieldRef<"Reviews", 'String'>
   readonly customerId: Prisma.FieldRef<"Reviews", 'String'>
   readonly techId: Prisma.FieldRef<"Reviews", 'String'>
+  readonly createdAt: Prisma.FieldRef<"Reviews", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"Reviews", 'DateTime'>
 }
     
 

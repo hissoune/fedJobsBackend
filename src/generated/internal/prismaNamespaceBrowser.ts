@@ -78,6 +78,8 @@ export const UserScalarFieldEnum = {
   name: 'name',
   email: 'email',
   password: 'password',
+  imageUrl: 'imageUrl',
+  age: 'age',
   refreshToken: 'refreshToken',
   role: 'role',
   createdAt: 'createdAt',
@@ -96,7 +98,9 @@ export const JobsScalarFieldEnum = {
   notes: 'notes',
   photos: 'photos',
   customerId: 'customerId',
-  technicianId: 'technicianId'
+  technicianId: 'technicianId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type JobsScalarFieldEnum = (typeof JobsScalarFieldEnum)[keyof typeof JobsScalarFieldEnum]
@@ -107,7 +111,9 @@ export const ApplicationsScalarFieldEnum = {
   message: 'message',
   jobId: 'jobId',
   techId: 'techId',
-  status: 'status'
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type ApplicationsScalarFieldEnum = (typeof ApplicationsScalarFieldEnum)[keyof typeof ApplicationsScalarFieldEnum]
@@ -119,7 +125,9 @@ export const ReviewsScalarFieldEnum = {
   comment: 'comment',
   jobId: 'jobId',
   customerId: 'customerId',
-  techId: 'techId'
+  techId: 'techId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type ReviewsScalarFieldEnum = (typeof ReviewsScalarFieldEnum)[keyof typeof ReviewsScalarFieldEnum]
