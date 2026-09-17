@@ -3,12 +3,15 @@ import { CreateJobDto } from './dto/create-job.dto';
 import { UpdateJobDto } from './dto/update-job.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { JobPriority, JobStatus } from 'src/generated/enums';
+import { AuthHelper } from 'src/auth/helper';
 
 @Injectable()
 export class JobsService {
 
   constructor(
-    private readonly prismaService:PrismaService
+    private readonly prismaService:PrismaService,
+        private readonly authHelper: AuthHelper,
+    
   ){}
   async create(userId:string,createJobDto: CreateJobDto) {
     try {
@@ -59,10 +62,19 @@ async findAll(page: number,priority?:string) {
 
   async findOne(id: string) {
    const job =await  this.prismaService.jobs.findUnique({
-    where:{id}
+    where:{id},
+    include:{
+    customer:true ,
+    applications:true
+    }
+   
    })
 
    if (!job) throw new NotFoundException('job not found')
+
+    if (job.customer  && job.customer.imageUrl) {
+      job.customer.imageUrl = await this.authHelper.presineduRL(job.customer.imageUrl|| '')
+    }
 
     return job
   }

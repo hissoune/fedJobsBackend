@@ -95,6 +95,7 @@ export const JobsScalarFieldEnum = {
   description: 'description',
   status: 'status',
   priority: 'priority',
+  price: 'price',
   notes: 'notes',
   photos: 'photos',
   customerId: 'customerId',

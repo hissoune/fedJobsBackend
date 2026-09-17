@@ -50,6 +50,7 @@ enum JobPriority {
     description      String
     status           JobStatus  @default(PENDING)
     priority         JobPriority @default(LOW)
+    price            String?
     notes            String[]
     photos           String[]
     customerId       String

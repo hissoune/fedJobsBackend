@@ -5,6 +5,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { PrismaModule } from 'src/prisma/prisma.module';
 import { JwtModule } from '@nestjs/jwt';
 import { AuthGuard } from 'src/guards/auth.guard';
+import { AuthHelper } from 'src/auth/helper';
 
 @Module({
   imports:[
@@ -15,6 +16,6 @@ import { AuthGuard } from 'src/guards/auth.guard';
         }),
   ],
   controllers: [JobsController],
-  providers: [JobsService,AuthGuard],
+  providers: [JobsService,AuthGuard,AuthHelper],
 })
 export class JobsModule {}
