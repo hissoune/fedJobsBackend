@@ -135,7 +135,7 @@ export class AuthService {
         throw new NotFoundException('user not found');
       }
 
-      const match = await this.authHelper.comparePasswords(user.refreshToken || '', refreshDto.refreshToken);
+      const match = await this.authHelper.comparePasswords( refreshDto.refreshToken,user.refreshToken || '');
       if (!match) {
         throw new NotFoundException('user not found');
       }

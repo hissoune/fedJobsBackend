@@ -12,7 +12,7 @@ import { ConfigModule } from '@nestjs/config';
   imports: [
     JwtModule.register({  
        secret: process.env.JWT_SECRET || 'your_jwt_secret_key',
-          signOptions: { expiresIn: '1h' },
+          signOptions: { expiresIn: '1s' },
     }),
        ConfigModule.forRoot({
           isGlobal: true,
