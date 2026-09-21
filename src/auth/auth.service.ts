@@ -18,9 +18,6 @@ export class AuthService {
 
   async register(registerDto: RegisterDto,file) {
 
-    
-   
-    
       try {
         const hashedPassword = await this.authHelper.hashPassword(registerDto.password || '');
         const savedUser = await this.prismaService.user.create({

@@ -76,6 +76,12 @@ async findAll(page: number,priority?:string) {
       job.customer.imageUrl = await this.authHelper.presineduRL(job.customer.imageUrl|| '')
     }
 
+    if (job.problemphotos) {
+      job.problemphotos = await Promise.all(
+        job.problemphotos.map((photo) => this.authHelper.presineduRL(photo || '')),
+      )
+    }
+
     return job
   }
 

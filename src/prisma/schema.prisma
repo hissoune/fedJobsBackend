@@ -52,7 +52,8 @@ enum JobPriority {
     priority         JobPriority @default(LOW)
     price            String?
     notes            String[]
-    photos           String[]
+    problemphotos    String[]
+    completionphotos String[]
     customerId       String
     technicianId     String?
     customer         User? @relation("customerJobs",fields: [customerId], references: [id])

@@ -58,7 +58,8 @@ export type JobsCountAggregateOutputType = {
   priority: number
   price: number
   notes: number
-  photos: number
+  problemphotos: number
+  completionphotos: number
   customerId: number
   technicianId: number
   createdAt: number
@@ -101,7 +102,8 @@ export type JobsCountAggregateInputType = {
   priority?: true
   price?: true
   notes?: true
-  photos?: true
+  problemphotos?: true
+  completionphotos?: true
   customerId?: true
   technicianId?: true
   createdAt?: true
@@ -189,7 +191,8 @@ export type JobsGroupByOutputType = {
   priority: $Enums.JobPriority
   price: string | null
   notes: string[]
-  photos: string[]
+  problemphotos: string[]
+  completionphotos: string[]
   customerId: string
   technicianId: string | null
   createdAt: Date
@@ -225,7 +228,8 @@ export type JobsWhereInput = {
   priority?: Prisma.EnumJobPriorityFilter<"Jobs"> | $Enums.JobPriority
   price?: Prisma.StringNullableFilter<"Jobs"> | string | null
   notes?: Prisma.StringNullableListFilter<"Jobs">
-  photos?: Prisma.StringNullableListFilter<"Jobs">
+  problemphotos?: Prisma.StringNullableListFilter<"Jobs">
+  completionphotos?: Prisma.StringNullableListFilter<"Jobs">
   customerId?: Prisma.StringFilter<"Jobs"> | string
   technicianId?: Prisma.StringNullableFilter<"Jobs"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Jobs"> | Date | string
@@ -244,7 +248,8 @@ export type JobsOrderByWithRelationInput = {
   priority?: Prisma.SortOrder
   price?: Prisma.SortOrderInput | Prisma.SortOrder
   notes?: Prisma.SortOrder
-  photos?: Prisma.SortOrder
+  problemphotos?: Prisma.SortOrder
+  completionphotos?: Prisma.SortOrder
   customerId?: Prisma.SortOrder
   technicianId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -266,7 +271,8 @@ export type JobsWhereUniqueInput = Prisma.AtLeast<{
   priority?: Prisma.EnumJobPriorityFilter<"Jobs"> | $Enums.JobPriority
   price?: Prisma.StringNullableFilter<"Jobs"> | string | null
   notes?: Prisma.StringNullableListFilter<"Jobs">
-  photos?: Prisma.StringNullableListFilter<"Jobs">
+  problemphotos?: Prisma.StringNullableListFilter<"Jobs">
+  completionphotos?: Prisma.StringNullableListFilter<"Jobs">
   customerId?: Prisma.StringFilter<"Jobs"> | string
   technicianId?: Prisma.StringNullableFilter<"Jobs"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Jobs"> | Date | string
@@ -285,7 +291,8 @@ export type JobsOrderByWithAggregationInput = {
   priority?: Prisma.SortOrder
   price?: Prisma.SortOrderInput | Prisma.SortOrder
   notes?: Prisma.SortOrder
-  photos?: Prisma.SortOrder
+  problemphotos?: Prisma.SortOrder
+  completionphotos?: Prisma.SortOrder
   customerId?: Prisma.SortOrder
   technicianId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -306,7 +313,8 @@ export type JobsScalarWhereWithAggregatesInput = {
   priority?: Prisma.EnumJobPriorityWithAggregatesFilter<"Jobs"> | $Enums.JobPriority
   price?: Prisma.StringNullableWithAggregatesFilter<"Jobs"> | string | null
   notes?: Prisma.StringNullableListFilter<"Jobs">
-  photos?: Prisma.StringNullableListFilter<"Jobs">
+  problemphotos?: Prisma.StringNullableListFilter<"Jobs">
+  completionphotos?: Prisma.StringNullableListFilter<"Jobs">
   customerId?: Prisma.StringWithAggregatesFilter<"Jobs"> | string
   technicianId?: Prisma.StringNullableWithAggregatesFilter<"Jobs"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Jobs"> | Date | string
@@ -321,7 +329,8 @@ export type JobsCreateInput = {
   priority?: $Enums.JobPriority
   price?: string | null
   notes?: Prisma.JobsCreatenotesInput | string[]
-  photos?: Prisma.JobsCreatephotosInput | string[]
+  problemphotos?: Prisma.JobsCreateproblemphotosInput | string[]
+  completionphotos?: Prisma.JobsCreatecompletionphotosInput | string[]
   createdAt?: Date | string
   updatedAt?: Date | string
   customer?: Prisma.UserCreateNestedOneWithoutCustomerJobsInput
@@ -338,7 +347,8 @@ export type JobsUncheckedCreateInput = {
   priority?: $Enums.JobPriority
   price?: string | null
   notes?: Prisma.JobsCreatenotesInput | string[]
-  photos?: Prisma.JobsCreatephotosInput | string[]
+  problemphotos?: Prisma.JobsCreateproblemphotosInput | string[]
+  completionphotos?: Prisma.JobsCreatecompletionphotosInput | string[]
   customerId: string
   technicianId?: string | null
   createdAt?: Date | string
@@ -355,7 +365,8 @@ export type JobsUpdateInput = {
   priority?: Prisma.EnumJobPriorityFieldUpdateOperationsInput | $Enums.JobPriority
   price?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.JobsUpdatenotesInput | string[]
-  photos?: Prisma.JobsUpdatephotosInput | string[]
+  problemphotos?: Prisma.JobsUpdateproblemphotosInput | string[]
+  completionphotos?: Prisma.JobsUpdatecompletionphotosInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   customer?: Prisma.UserUpdateOneWithoutCustomerJobsNestedInput
@@ -372,7 +383,8 @@ export type JobsUncheckedUpdateInput = {
   priority?: Prisma.EnumJobPriorityFieldUpdateOperationsInput | $Enums.JobPriority
   price?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.JobsUpdatenotesInput | string[]
-  photos?: Prisma.JobsUpdatephotosInput | string[]
+  problemphotos?: Prisma.JobsUpdateproblemphotosInput | string[]
+  completionphotos?: Prisma.JobsUpdatecompletionphotosInput | string[]
   customerId?: Prisma.StringFieldUpdateOperationsInput | string
   technicianId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -389,7 +401,8 @@ export type JobsCreateManyInput = {
   priority?: $Enums.JobPriority
   price?: string | null
   notes?: Prisma.JobsCreatenotesInput | string[]
-  photos?: Prisma.JobsCreatephotosInput | string[]
+  problemphotos?: Prisma.JobsCreateproblemphotosInput | string[]
+  completionphotos?: Prisma.JobsCreatecompletionphotosInput | string[]
   customerId: string
   technicianId?: string | null
   createdAt?: Date | string
@@ -404,7 +417,8 @@ export type JobsUpdateManyMutationInput = {
   priority?: Prisma.EnumJobPriorityFieldUpdateOperationsInput | $Enums.JobPriority
   price?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.JobsUpdatenotesInput | string[]
-  photos?: Prisma.JobsUpdatephotosInput | string[]
+  problemphotos?: Prisma.JobsUpdateproblemphotosInput | string[]
+  completionphotos?: Prisma.JobsUpdatecompletionphotosInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -417,7 +431,8 @@ export type JobsUncheckedUpdateManyInput = {
   priority?: Prisma.EnumJobPriorityFieldUpdateOperationsInput | $Enums.JobPriority
   price?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.JobsUpdatenotesInput | string[]
-  photos?: Prisma.JobsUpdatephotosInput | string[]
+  problemphotos?: Prisma.JobsUpdateproblemphotosInput | string[]
+  completionphotos?: Prisma.JobsUpdatecompletionphotosInput | string[]
   customerId?: Prisma.StringFieldUpdateOperationsInput | string
   technicianId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -450,7 +465,8 @@ export type JobsCountOrderByAggregateInput = {
   priority?: Prisma.SortOrder
   price?: Prisma.SortOrder
   notes?: Prisma.SortOrder
-  photos?: Prisma.SortOrder
+  problemphotos?: Prisma.SortOrder
+  completionphotos?: Prisma.SortOrder
   customerId?: Prisma.SortOrder
   technicianId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -576,7 +592,11 @@ export type JobsCreatenotesInput = {
   set: string[]
 }
 
-export type JobsCreatephotosInput = {
+export type JobsCreateproblemphotosInput = {
+  set: string[]
+}
+
+export type JobsCreatecompletionphotosInput = {
   set: string[]
 }
 
@@ -593,7 +613,12 @@ export type JobsUpdatenotesInput = {
   push?: string | string[]
 }
 
-export type JobsUpdatephotosInput = {
+export type JobsUpdateproblemphotosInput = {
+  set?: string[]
+  push?: string | string[]
+}
+
+export type JobsUpdatecompletionphotosInput = {
   set?: string[]
   push?: string | string[]
 }
@@ -634,7 +659,8 @@ export type JobsCreateWithoutCustomerInput = {
   priority?: $Enums.JobPriority
   price?: string | null
   notes?: Prisma.JobsCreatenotesInput | string[]
-  photos?: Prisma.JobsCreatephotosInput | string[]
+  problemphotos?: Prisma.JobsCreateproblemphotosInput | string[]
+  completionphotos?: Prisma.JobsCreatecompletionphotosInput | string[]
   createdAt?: Date | string
   updatedAt?: Date | string
   technician?: Prisma.UserCreateNestedOneWithoutTechnicianJobsInput
@@ -650,7 +676,8 @@ export type JobsUncheckedCreateWithoutCustomerInput = {
   priority?: $Enums.JobPriority
   price?: string | null
   notes?: Prisma.JobsCreatenotesInput | string[]
-  photos?: Prisma.JobsCreatephotosInput | string[]
+  problemphotos?: Prisma.JobsCreateproblemphotosInput | string[]
+  completionphotos?: Prisma.JobsCreatecompletionphotosInput | string[]
   technicianId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -676,7 +703,8 @@ export type JobsCreateWithoutTechnicianInput = {
   priority?: $Enums.JobPriority
   price?: string | null
   notes?: Prisma.JobsCreatenotesInput | string[]
-  photos?: Prisma.JobsCreatephotosInput | string[]
+  problemphotos?: Prisma.JobsCreateproblemphotosInput | string[]
+  completionphotos?: Prisma.JobsCreatecompletionphotosInput | string[]
   createdAt?: Date | string
   updatedAt?: Date | string
   customer?: Prisma.UserCreateNestedOneWithoutCustomerJobsInput
@@ -692,7 +720,8 @@ export type JobsUncheckedCreateWithoutTechnicianInput = {
   priority?: $Enums.JobPriority
   price?: string | null
   notes?: Prisma.JobsCreatenotesInput | string[]
-  photos?: Prisma.JobsCreatephotosInput | string[]
+  problemphotos?: Prisma.JobsCreateproblemphotosInput | string[]
+  completionphotos?: Prisma.JobsCreatecompletionphotosInput | string[]
   customerId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -737,7 +766,8 @@ export type JobsScalarWhereInput = {
   priority?: Prisma.EnumJobPriorityFilter<"Jobs"> | $Enums.JobPriority
   price?: Prisma.StringNullableFilter<"Jobs"> | string | null
   notes?: Prisma.StringNullableListFilter<"Jobs">
-  photos?: Prisma.StringNullableListFilter<"Jobs">
+  problemphotos?: Prisma.StringNullableListFilter<"Jobs">
+  completionphotos?: Prisma.StringNullableListFilter<"Jobs">
   customerId?: Prisma.StringFilter<"Jobs"> | string
   technicianId?: Prisma.StringNullableFilter<"Jobs"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Jobs"> | Date | string
@@ -768,7 +798,8 @@ export type JobsCreateWithoutApplicationsInput = {
   priority?: $Enums.JobPriority
   price?: string | null
   notes?: Prisma.JobsCreatenotesInput | string[]
-  photos?: Prisma.JobsCreatephotosInput | string[]
+  problemphotos?: Prisma.JobsCreateproblemphotosInput | string[]
+  completionphotos?: Prisma.JobsCreatecompletionphotosInput | string[]
   createdAt?: Date | string
   updatedAt?: Date | string
   customer?: Prisma.UserCreateNestedOneWithoutCustomerJobsInput
@@ -784,7 +815,8 @@ export type JobsUncheckedCreateWithoutApplicationsInput = {
   priority?: $Enums.JobPriority
   price?: string | null
   notes?: Prisma.JobsCreatenotesInput | string[]
-  photos?: Prisma.JobsCreatephotosInput | string[]
+  problemphotos?: Prisma.JobsCreateproblemphotosInput | string[]
+  completionphotos?: Prisma.JobsCreatecompletionphotosInput | string[]
   customerId: string
   technicianId?: string | null
   createdAt?: Date | string
@@ -816,7 +848,8 @@ export type JobsUpdateWithoutApplicationsInput = {
   priority?: Prisma.EnumJobPriorityFieldUpdateOperationsInput | $Enums.JobPriority
   price?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.JobsUpdatenotesInput | string[]
-  photos?: Prisma.JobsUpdatephotosInput | string[]
+  problemphotos?: Prisma.JobsUpdateproblemphotosInput | string[]
+  completionphotos?: Prisma.JobsUpdatecompletionphotosInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   customer?: Prisma.UserUpdateOneWithoutCustomerJobsNestedInput
@@ -832,7 +865,8 @@ export type JobsUncheckedUpdateWithoutApplicationsInput = {
   priority?: Prisma.EnumJobPriorityFieldUpdateOperationsInput | $Enums.JobPriority
   price?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.JobsUpdatenotesInput | string[]
-  photos?: Prisma.JobsUpdatephotosInput | string[]
+  problemphotos?: Prisma.JobsUpdateproblemphotosInput | string[]
+  completionphotos?: Prisma.JobsUpdatecompletionphotosInput | string[]
   customerId?: Prisma.StringFieldUpdateOperationsInput | string
   technicianId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -848,7 +882,8 @@ export type JobsCreateWithoutReviewInput = {
   priority?: $Enums.JobPriority
   price?: string | null
   notes?: Prisma.JobsCreatenotesInput | string[]
-  photos?: Prisma.JobsCreatephotosInput | string[]
+  problemphotos?: Prisma.JobsCreateproblemphotosInput | string[]
+  completionphotos?: Prisma.JobsCreatecompletionphotosInput | string[]
   createdAt?: Date | string
   updatedAt?: Date | string
   customer?: Prisma.UserCreateNestedOneWithoutCustomerJobsInput
@@ -864,7 +899,8 @@ export type JobsUncheckedCreateWithoutReviewInput = {
   priority?: $Enums.JobPriority
   price?: string | null
   notes?: Prisma.JobsCreatenotesInput | string[]
-  photos?: Prisma.JobsCreatephotosInput | string[]
+  problemphotos?: Prisma.JobsCreateproblemphotosInput | string[]
+  completionphotos?: Prisma.JobsCreatecompletionphotosInput | string[]
   customerId: string
   technicianId?: string | null
   createdAt?: Date | string
@@ -896,7 +932,8 @@ export type JobsUpdateWithoutReviewInput = {
   priority?: Prisma.EnumJobPriorityFieldUpdateOperationsInput | $Enums.JobPriority
   price?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.JobsUpdatenotesInput | string[]
-  photos?: Prisma.JobsUpdatephotosInput | string[]
+  problemphotos?: Prisma.JobsUpdateproblemphotosInput | string[]
+  completionphotos?: Prisma.JobsUpdatecompletionphotosInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   customer?: Prisma.UserUpdateOneWithoutCustomerJobsNestedInput
@@ -912,7 +949,8 @@ export type JobsUncheckedUpdateWithoutReviewInput = {
   priority?: Prisma.EnumJobPriorityFieldUpdateOperationsInput | $Enums.JobPriority
   price?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.JobsUpdatenotesInput | string[]
-  photos?: Prisma.JobsUpdatephotosInput | string[]
+  problemphotos?: Prisma.JobsUpdateproblemphotosInput | string[]
+  completionphotos?: Prisma.JobsUpdatecompletionphotosInput | string[]
   customerId?: Prisma.StringFieldUpdateOperationsInput | string
   technicianId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -928,7 +966,8 @@ export type JobsCreateManyCustomerInput = {
   priority?: $Enums.JobPriority
   price?: string | null
   notes?: Prisma.JobsCreatenotesInput | string[]
-  photos?: Prisma.JobsCreatephotosInput | string[]
+  problemphotos?: Prisma.JobsCreateproblemphotosInput | string[]
+  completionphotos?: Prisma.JobsCreatecompletionphotosInput | string[]
   technicianId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -942,7 +981,8 @@ export type JobsCreateManyTechnicianInput = {
   priority?: $Enums.JobPriority
   price?: string | null
   notes?: Prisma.JobsCreatenotesInput | string[]
-  photos?: Prisma.JobsCreatephotosInput | string[]
+  problemphotos?: Prisma.JobsCreateproblemphotosInput | string[]
+  completionphotos?: Prisma.JobsCreatecompletionphotosInput | string[]
   customerId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -956,7 +996,8 @@ export type JobsUpdateWithoutCustomerInput = {
   priority?: Prisma.EnumJobPriorityFieldUpdateOperationsInput | $Enums.JobPriority
   price?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.JobsUpdatenotesInput | string[]
-  photos?: Prisma.JobsUpdatephotosInput | string[]
+  problemphotos?: Prisma.JobsUpdateproblemphotosInput | string[]
+  completionphotos?: Prisma.JobsUpdatecompletionphotosInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   technician?: Prisma.UserUpdateOneWithoutTechnicianJobsNestedInput
@@ -972,7 +1013,8 @@ export type JobsUncheckedUpdateWithoutCustomerInput = {
   priority?: Prisma.EnumJobPriorityFieldUpdateOperationsInput | $Enums.JobPriority
   price?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.JobsUpdatenotesInput | string[]
-  photos?: Prisma.JobsUpdatephotosInput | string[]
+  problemphotos?: Prisma.JobsUpdateproblemphotosInput | string[]
+  completionphotos?: Prisma.JobsUpdatecompletionphotosInput | string[]
   technicianId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -988,7 +1030,8 @@ export type JobsUncheckedUpdateManyWithoutCustomerInput = {
   priority?: Prisma.EnumJobPriorityFieldUpdateOperationsInput | $Enums.JobPriority
   price?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.JobsUpdatenotesInput | string[]
-  photos?: Prisma.JobsUpdatephotosInput | string[]
+  problemphotos?: Prisma.JobsUpdateproblemphotosInput | string[]
+  completionphotos?: Prisma.JobsUpdatecompletionphotosInput | string[]
   technicianId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1002,7 +1045,8 @@ export type JobsUpdateWithoutTechnicianInput = {
   priority?: Prisma.EnumJobPriorityFieldUpdateOperationsInput | $Enums.JobPriority
   price?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.JobsUpdatenotesInput | string[]
-  photos?: Prisma.JobsUpdatephotosInput | string[]
+  problemphotos?: Prisma.JobsUpdateproblemphotosInput | string[]
+  completionphotos?: Prisma.JobsUpdatecompletionphotosInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   customer?: Prisma.UserUpdateOneWithoutCustomerJobsNestedInput
@@ -1018,7 +1062,8 @@ export type JobsUncheckedUpdateWithoutTechnicianInput = {
   priority?: Prisma.EnumJobPriorityFieldUpdateOperationsInput | $Enums.JobPriority
   price?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.JobsUpdatenotesInput | string[]
-  photos?: Prisma.JobsUpdatephotosInput | string[]
+  problemphotos?: Prisma.JobsUpdateproblemphotosInput | string[]
+  completionphotos?: Prisma.JobsUpdatecompletionphotosInput | string[]
   customerId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1034,7 +1079,8 @@ export type JobsUncheckedUpdateManyWithoutTechnicianInput = {
   priority?: Prisma.EnumJobPriorityFieldUpdateOperationsInput | $Enums.JobPriority
   price?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.JobsUpdatenotesInput | string[]
-  photos?: Prisma.JobsUpdatephotosInput | string[]
+  problemphotos?: Prisma.JobsUpdateproblemphotosInput | string[]
+  completionphotos?: Prisma.JobsUpdatecompletionphotosInput | string[]
   customerId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1079,7 +1125,8 @@ export type JobsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   priority?: boolean
   price?: boolean
   notes?: boolean
-  photos?: boolean
+  problemphotos?: boolean
+  completionphotos?: boolean
   customerId?: boolean
   technicianId?: boolean
   createdAt?: boolean
@@ -1099,7 +1146,8 @@ export type JobsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   priority?: boolean
   price?: boolean
   notes?: boolean
-  photos?: boolean
+  problemphotos?: boolean
+  completionphotos?: boolean
   customerId?: boolean
   technicianId?: boolean
   createdAt?: boolean
@@ -1116,7 +1164,8 @@ export type JobsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   priority?: boolean
   price?: boolean
   notes?: boolean
-  photos?: boolean
+  problemphotos?: boolean
+  completionphotos?: boolean
   customerId?: boolean
   technicianId?: boolean
   createdAt?: boolean
@@ -1133,14 +1182,15 @@ export type JobsSelectScalar = {
   priority?: boolean
   price?: boolean
   notes?: boolean
-  photos?: boolean
+  problemphotos?: boolean
+  completionphotos?: boolean
   customerId?: boolean
   technicianId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type JobsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "status" | "priority" | "price" | "notes" | "photos" | "customerId" | "technicianId" | "createdAt" | "updatedAt", ExtArgs["result"]["jobs"]>
+export type JobsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "status" | "priority" | "price" | "notes" | "problemphotos" | "completionphotos" | "customerId" | "technicianId" | "createdAt" | "updatedAt", ExtArgs["result"]["jobs"]>
 export type JobsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   customer?: boolean | Prisma.Jobs$customerArgs<ExtArgs>
   technician?: boolean | Prisma.Jobs$technicianArgs<ExtArgs>
@@ -1173,7 +1223,8 @@ export type $JobsPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     priority: $Enums.JobPriority
     price: string | null
     notes: string[]
-    photos: string[]
+    problemphotos: string[]
+    completionphotos: string[]
     customerId: string
     technicianId: string | null
     createdAt: Date
@@ -1612,7 +1663,8 @@ export interface JobsFieldRefs {
   readonly priority: Prisma.FieldRef<"Jobs", 'JobPriority'>
   readonly price: Prisma.FieldRef<"Jobs", 'String'>
   readonly notes: Prisma.FieldRef<"Jobs", 'String[]'>
-  readonly photos: Prisma.FieldRef<"Jobs", 'String[]'>
+  readonly problemphotos: Prisma.FieldRef<"Jobs", 'String[]'>
+  readonly completionphotos: Prisma.FieldRef<"Jobs", 'String[]'>
   readonly customerId: Prisma.FieldRef<"Jobs", 'String'>
   readonly technicianId: Prisma.FieldRef<"Jobs", 'String'>
   readonly createdAt: Prisma.FieldRef<"Jobs", 'DateTime'>
