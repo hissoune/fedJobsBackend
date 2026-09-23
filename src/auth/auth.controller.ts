@@ -6,6 +6,8 @@ import { AuthGuard } from 'src/guards/auth.guard';
 import { FileInterceptor } from '@nestjs/platform-express';
 import {Express}from 'express'
   import { UploadedFile } from '@nestjs/common';
+import { RolesGuard } from 'src/guards/roles.guard';
+import { Roles } from 'src/guards/roles.decorator';
 
 @Controller('auth')
 export class AuthController {
@@ -25,11 +27,24 @@ register(
   @Body() registerDto: RegisterDto,
   @UploadedFile() file: Express.Multer.File,
 ) {
-  console.log(registerDto);
-  console.log('fgf', req.headers);
-  console.log('dfdf', file);
-
   return this.authService.register(registerDto, file);
+}
+@UseGuards(AuthGuard)
+@Patch('update')
+@UseInterceptors(
+  FileInterceptor('file', {
+    limits: {
+      fileSize: 5 * 1024 * 1024,
+    },
+  }),
+)
+update(
+  @Req() req,
+  @Body() registerDto: any,
+  @UploadedFile() file: Express.Multer.File,
+) {
+  const userId = req.user.id
+  return this.authService.update(userId,registerDto, file);
 }
 
 

@@ -16,7 +16,10 @@ export class AuthService {
     @InjectMinio() private readonly minio: Client
   ) {}
 
-  async register(registerDto: RegisterDto,file) {
+  async register(
+    registerDto: RegisterDto,
+    file?: { originalname: string; buffer: Buffer; size: number; mimetype: string },
+  ) {
 
       try {
         const hashedPassword = await this.authHelper.hashPassword(registerDto.password || '');
@@ -54,6 +57,63 @@ export class AuthService {
         throw new BadRequestException('Registration failed');
       }
   }
+
+  async update( 
+    id: string,
+    registerDto: any,
+    file?: { originalname: string; buffer: Buffer; size: number; mimetype: string },
+  ) {
+  try {
+    const user = await this.prismaService.user.findUnique({
+      where: { id },
+    });
+
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+
+    const data: any = {
+      name: registerDto.name,
+      age: registerDto.age,
+      email: registerDto.email,
+    };
+
+    if (registerDto.password) {
+      data.password = await this.authHelper.hashPassword(
+        registerDto.password,
+      );
+    }
+
+    if (file) {
+      const imageKey = `avatars/${user.id}/${crypto.randomUUID()}`;
+
+      await this.minio.putObject(
+        process.env.MINIO_BUCKET || 'uploads',
+        imageKey,
+        file.buffer,
+        file.size,
+        {
+          'Content-Type': file.mimetype,
+        },
+      );
+
+      data.imageUrl = imageKey;
+    }
+
+    const updatedUser = await this.prismaService.user.update({
+      where: { id },
+      data,
+    });
+
+    return updatedUser;
+  } catch (error) {
+    if (error instanceof NotFoundException) {
+      throw error;
+    }
+
+    throw new BadRequestException('Update failed');
+  }
+}
 
   async login(loginAuthDto: loginAuthDto) {
 
