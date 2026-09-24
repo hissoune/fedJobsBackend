@@ -49,8 +49,11 @@ export class ApplicationsService {
     });
   }
 
-  async findAll() {
+  async findAll(userId:string) {
     return this.prisma.applications.findMany({
+      where:{
+        techId:userId
+      },
       include: {
         technician: true,
         job: true,
