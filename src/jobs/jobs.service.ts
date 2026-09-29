@@ -70,6 +70,8 @@ async findAll(page: number,priority?:string) {
    
    })
 
+   
+
    if (!job) throw new NotFoundException('job not found')
 
     if (job.customer  && job.customer.imageUrl) {
@@ -112,6 +114,44 @@ async findAll(page: number,priority?:string) {
     
    }
   }
+
+  
+    async apply(createApplicationDto: {jobId:string,message:string},userId) {
+      const { jobId, message } = createApplicationDto;
+  
+      const job = await this.prismaService.jobs.findUnique({
+        where: { id: jobId },
+      });
+  
+      if (!job) {
+        throw new NotFoundException('Job not found');
+      }
+  
+      const existingApplication =
+        await this.prismaService.applications.findFirst({
+          where: {
+            jobId,
+            techId:userId,
+          },
+        });
+  
+      if (existingApplication) {
+        
+        throw new BadRequestException(
+          'You already applied to this job',
+        );
+      }
+     
+      await this.prismaService.applications.create({
+        data: {
+          jobId,
+          techId:userId,
+          message,
+        },
+      });
+  
+      return await this.findOne(jobId)
+    }
 
 
 }

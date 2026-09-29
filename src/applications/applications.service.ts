@@ -13,8 +13,8 @@ export class ApplicationsService {
     private readonly prisma: PrismaService,
   ) {}
 
-  async create(createApplicationDto: CreateApplicationDto) {
-    const { jobId, techId, message } = createApplicationDto;
+  async create(createApplicationDto: CreateApplicationDto,userId) {
+    const { jobId, message } = createApplicationDto;
 
     // Does the job exist?
     const job = await this.prisma.jobs.findUnique({
@@ -30,7 +30,7 @@ export class ApplicationsService {
       await this.prisma.applications.findFirst({
         where: {
           jobId,
-          techId,
+          techId:userId,
         },
       });
 
@@ -39,13 +39,22 @@ export class ApplicationsService {
         'You already applied to this job',
       );
     }
-
-    return this.prisma.applications.create({
+   console.log("application will be created ");
+   
+    await this.prisma.applications.create({
       data: {
         jobId,
-        techId,
+        techId:userId,
         message,
       },
+    });
+
+    return await this.prisma.jobs.findUnique({
+      where: { id: jobId },
+       include:{
+        customer:true ,
+        applications:true
+        }
     });
   }
 

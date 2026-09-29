@@ -10,8 +10,9 @@ export class ApplicationsController {
   constructor(private readonly applicationsService: ApplicationsService) {}
 
   @Post()
-  create(@Body() createApplicationDto: CreateApplicationDto) {
-    return this.applicationsService.create(createApplicationDto);
+  create(@Body() createApplicationDto: CreateApplicationDto,@Req() req) {
+    const userId = req.user.id
+    return this.applicationsService.create(createApplicationDto,userId);
   }
   @Get()
   findAll(@Req() req:any) {

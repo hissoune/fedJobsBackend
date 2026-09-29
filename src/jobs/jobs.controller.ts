@@ -19,6 +19,12 @@ export class JobsController {
 
     return this.jobsService.create(userId,createJobDto);
   }
+  @Post('apply')
+  apply(@Body() createApplicationDto: {jobId:string,message:string},@Req() req:any) {
+    const userId = req.user.id
+
+    return this.jobsService.apply(createApplicationDto,userId);
+  } 
 
   @Get()
   findAll(@Query('page') page:number,@Query('priority') priority?:string) {
