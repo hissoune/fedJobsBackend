@@ -58,11 +58,23 @@ export class ApplicationsService {
     });
   }
 
-  async findAll(userId:string) {
+  async findAll(userId:string, status?: ApplicationStatus) {
+
+      let where: {
+        techId: string;
+        status?: ApplicationStatus;
+      } = {
+          techId: userId,
+        };
+    
+        if (status) {
+          console.log("status is ",status);
+         where= {...where, status:status };
+        }
+
+      
     return this.prisma.applications.findMany({
-      where:{
-        techId:userId
-      },
+      where,
       include: {
         technician: true,
         job: true,
@@ -88,6 +100,39 @@ export class ApplicationsService {
 
     return application;
   }
+
+  async update(id: string, userId:string, body: any) {
+
+    console.log("userId in update", userId);
+    console.log("message in update", body);
+    const application = await this.prisma.applications.findUnique({
+      where: { id },
+    });
+
+    if (!application ) {
+      throw new NotFoundException('Application not found');
+    }
+
+    if (application.techId !== userId) {
+      throw new BadRequestException(
+        'You are not authorized to update this application',
+      );
+    }
+
+    if (application.status !== ApplicationStatus.PENDING) {
+      throw new BadRequestException(
+        'You cannot update an application that has been processed',
+      );
+    }
+
+    await  this.prisma.applications.update({
+      where: { id },
+      data: body,
+    });
+
+    return await this.findOne(id);
+  }
+
 
   async updateStatus(
     id: string,
@@ -122,6 +167,8 @@ export class ApplicationsService {
       where: { id },
     });
   }
+
+
   async approve(id: string) {
   const application = await this.prisma.applications.findUnique({
     where: { id },

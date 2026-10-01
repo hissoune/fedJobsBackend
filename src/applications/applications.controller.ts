@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Req, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Req, UseGuards, Query } from '@nestjs/common';
 import { ApplicationsService } from './applications.service';
 import { CreateApplicationDto } from './dto/create-application.dto';
 import { ApplicationStatus } from 'src/generated/enums';
@@ -15,9 +15,11 @@ export class ApplicationsController {
     return this.applicationsService.create(createApplicationDto,userId);
   }
   @Get()
-  findAll(@Req() req:any) {
+  findAll(@Req() req:any , @Query() status: any) {
      const userId = req.user.id
-    return this.applicationsService.findAll(userId);
+
+     console.log("status in controller", status);
+    return this.applicationsService.findAll(userId, status.status );
   }
  
   @Get(':id')
@@ -25,11 +27,17 @@ export class ApplicationsController {
      const userId = req.user.id
     return this.applicationsService.findOne(id);
   }
-  
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() status: ApplicationStatus, @Req() req:any) {
+
+  @Patch(':id/status')
+  updateStatus(@Param('id') id: string, @Body() status: ApplicationStatus, @Req() req:any) {
      const userId = req.user.id
     return this.applicationsService.updateStatus(id, status);
+  }
+  
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() body: any, @Req() req:any) {
+     const userId = req.user.id
+    return this.applicationsService.update(id,userId, body);
   }
   
   @Delete(':id')
