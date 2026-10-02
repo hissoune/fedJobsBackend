@@ -125,9 +125,9 @@ export class ApplicationsService {
       );
     }
         await  this.prisma.applications.update({
-      where: { id },
-      data: body,
-    });
+          where: { id },
+          data: body,
+        });
 
     return await this.findOne(id);
   }
