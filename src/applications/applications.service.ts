@@ -121,11 +121,10 @@ export class ApplicationsService {
 
     if (application.status !== ApplicationStatus.PENDING) {
       throw new BadRequestException(
-        'You cannot update an application that has been processed',
+        `You cannot update an application that has been ${application.status}`,
       );
     }
-
-    await  this.prisma.applications.update({
+        await  this.prisma.applications.update({
       where: { id },
       data: body,
     });
